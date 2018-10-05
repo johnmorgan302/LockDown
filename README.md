@@ -6,7 +6,7 @@ The purpose of this script is to prevent infected computers from
 spreading infection on the network.  We have several types of
 systems, and each must be treated differently.
 
-SERVERS - Must not be automatically disabled.
+<h2>SERVERS</h2> - Must not be automatically disabled.
 
 NONPERSISTENT VDI - A reboot or shutdown will elminate most
                     threats as these systems return to a
