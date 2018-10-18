@@ -43,8 +43,10 @@ Write-Output "Beginning Script."
 # Our tasks are prepended with KSC to make them easier to
 # search for - Example: schtasks /query | findstr -i ksc
 Write-Output "Cleaning old tasks (failure means no tasks to clean)."
-schtasks /delete /tn kscreboot /f
-schtasks /delete /tn ksclockdown /f	
+# 10/18 > Added redirection of error streams to suppress messages.
+# This gets rid of the bug in PS v1 and v2 that breaks the script.
+schtasks /delete /tn kscreboot /f > $null 2>&1
+schtasks /delete /tn ksclockdown /f	> $null 2>&1
 
 
 #=[ HANDLE DIFFERENT SYSTEM TYPES]=======================================
