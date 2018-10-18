@@ -42,7 +42,7 @@ Write-Output "Beginning Script."
 # Attempt to delete any old tasks if they exist.
 # Our tasks are prepended with KSC to make them easier to
 # search for - Example: schtasks /query | findstr -i ksc
-Write-Output "Cleaning old tasks (failure means no tasks to clean)."
+Write-Output "Cleaning old tasks."
 # 10/18 > Added redirection of error streams to suppress messages.
 # This gets rid of the bug in PS v1 and v2 that breaks the script.
 schtasks /delete /tn kscreboot /f > $null 2>&1
