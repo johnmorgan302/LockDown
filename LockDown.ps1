@@ -33,21 +33,10 @@ $a = Get-Date -Format mmss
 #              machines, uncomment the line below.
 #mkdir c:\temp
 
-
 #=[ HOUSE KEEPING ]======================================================
 
 # Report back to the console that things are getting under way.
 Write-Output "Beginning Script."
-
-# Attempt to delete any old tasks if they exist.
-# Our tasks are prepended with KSC to make them easier to
-# search for - Example: schtasks /query | findstr -i ksc
-Write-Output "Cleaning old tasks."
-# 10/18 > Added redirection of error streams to suppress messages.
-# This gets rid of the bug in PS v1 and v2 that breaks the script.
-schtasks /delete /tn kscreboot /f > $null 2>&1
-schtasks /delete /tn ksclockdown /f	> $null 2>&1
-
 
 #=[ HANDLE DIFFERENT SYSTEM TYPES]=======================================
 # Our non-persistent VDI systems all begin with "VDI".  
@@ -109,9 +98,10 @@ if( $env:ComputerName -like "VDI*"){
 	write-output 'For Each objItem in colItems' >> 'c:\temp\lockdown.vbs'
 	write-output '    objItem.Enable' >> 'c:\temp\lockdown.vbs'
 	write-output 'Next' >> 'c:\temp\lockdown.vbs'
-	#Remove the schedule task.
+	#Remove the scheduled tasks.
 	write-output 'Set objShell = Wscript.CreateObject("Wscript.Shell")' >> 'c:\temp\lockdown.vbs'
 	write-output 'objShell.Run("schtasks /delete /tn ""KSCLockDown"" /f")' >> 'c:\temp\lockdown.vbs'
+	write-output 'objShell.Run("schtasks /delete /tn ""kscreboot"" /f")' >> 'c:\temp\lockdown.vbs'
 	#Remove the VBScript files associated with the scheduled task.
 	write-output 'obj.DeleteFile("c:\temp\lockdown.vbs")' >> 'c:\temp\lockdown.vbs'
 	write-output 'obj.DeleteFile("C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs")' >> 'c:\temp\lockdown.vbs'
