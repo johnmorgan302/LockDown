@@ -38,6 +38,7 @@ race condition with Threat Response.  As of this writing,
 collections are taking 2-6 minutes, and the reboot is set to
 occur 10 minutes after the script starts running.
 
+<h2>Summary</h2>
 While I don't expect this script to be useful "as is" to anyone
 outside of the organization, it may prove useful with some slight
 tweeks.  Failing that, feel free to use this code to write your
