@@ -113,17 +113,17 @@ if( $env:ComputerName -like "VDI*"){
 	$myString =  "Unlock Code = " + $a
 	Write-Output $myString
 	$b='strCode="' + $a + '"'
-	write-output $b > 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
-	write-output 'while NOT(strInput = strCode)' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
-	write-output '    strInput = InputBox("This computer has been locked down due to suspected malware.  Enter the unlock code to restore normal operation.", "KSC Information Security")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
-	write-output 'wend' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
-	write-output 'Set obj = CreateObject("Scripting.FileSystemObject")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
-	write-output 'obj.DeleteFile("C:\temp\key.txt")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\KSCUnlock.vbs'
+	write-output $b > 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
+	write-output 'while NOT(strInput = strCode)' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
+	write-output '    strInput = InputBox("This computer has been locked down due to suspected malware.  Enter the unlock code to restore normal operation.", "KSC Information Security")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
+	write-output 'wend' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
+	write-output 'Set obj = CreateObject("Scripting.FileSystemObject")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
+	write-output 'obj.DeleteFile("C:\temp\key.txt")' >> 'C:\programdata\microsoft\windows\start menu\programs\startup\kscunlock.vbs'
 
 	# Create the task pointing to the script written above.
 	# Needed to move this below all file creation to get around a bug in PowerShell v1 & v2. Described below
 	# http://www.leeholmes.com/blog/2008/07/30/workaround-the-os-handles-position-is-not-what-filestream-expected/
-	schtasks /create /tn "KSCLockDown" /tr "c:\Windows\SysWOW64\cscript.exe c:\temp\lockdown.vbs" /ru system /sc ONSTART
+	schtasks /create /tn "ksclockdown" /tr "c:\Windows\SysWOW64\cscript.exe c:\temp\lockdown.vbs" /ru system /sc ONSTART
 	#Schedule a shutdown
 	schtasks /create /tn "kscreboot" /tr "shutdown -s -f -d P:5:19 -t 60" /ru system /sc once /st $rebootTime
 }
