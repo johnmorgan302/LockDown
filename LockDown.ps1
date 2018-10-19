@@ -100,7 +100,7 @@ if( $env:ComputerName -like "VDI*"){
 	write-output 'Next' >> 'c:\temp\lockdown.vbs'
 	#Remove the scheduled tasks.
 	write-output 'Set objShell = Wscript.CreateObject("Wscript.Shell")' >> 'c:\temp\lockdown.vbs'
-	write-output 'objShell.Run("schtasks /delete /tn ""KSCLockDown"" /f")' >> 'c:\temp\lockdown.vbs'
+	write-output 'objShell.Run("schtasks /delete /tn ""ksclockdown"" /f")' >> 'c:\temp\lockdown.vbs'
 	write-output 'objShell.Run("schtasks /delete /tn ""kscreboot"" /f")' >> 'c:\temp\lockdown.vbs'
 	#Remove the VBScript files associated with the scheduled task.
 	write-output 'obj.DeleteFile("c:\temp\lockdown.vbs")' >> 'c:\temp\lockdown.vbs'
